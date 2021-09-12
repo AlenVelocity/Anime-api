@@ -1,10 +1,10 @@
 {
-  "name": "infinity-anime-api",
+  "name": "anime-api",
   "version": "1.0.0",
-  "description": "Infinity-Anime-API",
+  "description": "Anime-API",
   "main": "dist/server.js",
   "scripts": {
-    "build": "rm -rf dist && tsc -p .",
+    "build": "rm -rf api && tsc -p .",
     "start": "node dist/server.js",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "fmt": "prettier --config .prettierrc \"src/**/*.ts\" --write"
