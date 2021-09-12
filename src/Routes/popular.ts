@@ -1,17 +1,18 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
 import { Router } from 'express'
-import { GOGO_URL } from '../Constants'
 import { IMinimalAnime } from '../Types'
+import { getURL } from '../utils'
 
 export default (): Router => {
     const router = Router()
 
     router.get('/:page', async (req, res) => {
         const results = new Array<IMinimalAnime>()
-        if (isNaN(parseInt(req.params.page))) return void res.status(400).send('Page must be a number')
+        const { page } = req.params
+        if (isNaN(parseInt(page))) return void res.status(400).send('Page must be a number')
         try {
-            const { data } = await axios.get<string>(GOGO_URL.concat(`/popular?page=${req.params.page}`))
+            const { data } = await axios.get<string>(getURL({ page }, '/popular'))
             const $ = cheerio.load(data)
             $('.img').each(function () {
                 const title = $(this).children('a').attr().title
